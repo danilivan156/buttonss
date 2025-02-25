@@ -39,60 +39,28 @@
   display: none;
 }
 .btn {
-  border-radius: 99rem;
-  border-width: 2px;
-  overflow: hidden;
-  padding: 0.8rem 3rem;
-  position: relative;
+  --tilt: 40deg;
+  background: none;
+  -webkit-mask-image: none;
+  padding: 2rem 5rem;
+  perspective: 500px;
+  transform-style: preserve-3d;
 }
-.btn span {
-  mix-blend-mode: difference;
-}
-.btn:before {
-  -webkit-animation: move-out 0.3s;
-  animation: move-out 0.3s;
+.btn .text-container {
   background: #fff;
-  content: "";
-  height: 100%;
-  left: -100%;
+  display: grid;
+  inset: 0;
+  place-items: center;
   position: absolute;
-  top: 0;
-  width: 100%;
-  will-change: transform;
+  transform-origin: center center;
+  transition: transform 0.2s;
 }
-.btn:hover:before {
-  -webkit-animation: move-in 0.3s forwards;
-  animation: move-in 0.3s forwards;
+.btn .text {
+  color: #000;
 }
-@-webkit-keyframes move-in {
-  0% {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(100%);
-  }
+.btn:hover .text-container:first-child {
+  transform: rotateY(var(--tilt));
 }
-@keyframes move-in {
-  0% {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(100%);
-  }
-}
-@-webkit-keyframes move-out {
-  0% {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(200%);
-  }
-}
-@keyframes move-out {
-  0% {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(200%);
-  }
+.btn:hover .text-container:nth-child(2) {
+  transform: rotateY(calc(var(--tilt) * -1));
 }

@@ -39,30 +39,89 @@
   display: none;
 }
 .btn {
-  border-radius: 99rem;
-  border-width: 2px;
+  --tilt: 30px;
+  border-width: 1px;
+  display: grid;
+  padding: 1.2rem 3rem;
+  place-content: center;
+}
+.btn,
+.btn .text-container {
   overflow: hidden;
-  padding: 0.8rem 3rem;
   position: relative;
 }
-.btn span {
+.btn .text-container {
+  display: block;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.btn .text {
+  display: block;
+  font-weight: 900;
   mix-blend-mode: difference;
+  position: relative;
+}
+.btn:hover .text {
+  -webkit-animation: move-right-alternate 0.3s ease forwards;
+  animation: move-right-alternate 0.3s ease forwards;
+}
+@-webkit-keyframes move-right-alternate {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(80%);
+  }
+  51% {
+    transform: translateX(-80%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes move-right-alternate {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(80%);
+  }
+  51% {
+    transform: translateX(-80%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 .btn:before {
-  -webkit-animation: move-out 0.3s;
-  animation: move-out 0.3s;
+  -webkit-animation: move-out 0.3s ease;
+  animation: move-out 0.3s ease;
   background: #fff;
+  -webkit-clip-path: polygon(
+    0 0,
+    calc(100% - var(--tilt)) 0,
+    100% 50%,
+    calc(100% - var(--tilt)) 100%,
+    0 100%
+  );
+  clip-path: polygon(
+    0 0,
+    calc(100% - var(--tilt)) 0,
+    100% 50%,
+    calc(100% - var(--tilt)) 100%,
+    0 100%
+  );
   content: "";
   height: 100%;
-  left: -100%;
+  left: calc(-100% - var(--tilt));
   position: absolute;
   top: 0;
-  width: 100%;
-  will-change: transform;
+  width: calc(100% + var(--tilt));
 }
 .btn:hover:before {
-  -webkit-animation: move-in 0.3s forwards;
-  animation: move-in 0.3s forwards;
+  -webkit-animation: move-in 0.3s ease forwards;
+  animation: move-in 0.3s ease forwards;
 }
 @-webkit-keyframes move-in {
   0% {

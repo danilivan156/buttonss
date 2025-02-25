@@ -39,60 +39,59 @@
   display: none;
 }
 .btn {
-  border-radius: 99rem;
-  border-width: 2px;
+  --background: #000;
+  background: none;
   overflow: hidden;
   padding: 0.8rem 3rem;
   position: relative;
 }
 .btn span {
-  mix-blend-mode: difference;
+  display: block;
+  position: relative;
+  transition: transform 0.2s ease;
 }
+.btn:after,
 .btn:before {
-  -webkit-animation: move-out 0.3s;
-  animation: move-out 0.3s;
+  --tilt: 20px;
   background: #fff;
+  -webkit-clip-path: polygon(0 50%, 0 0, 100% 0, 100% 50%, 100% 100%, 0 100%);
+  clip-path: polygon(0 50%, 0 0, 100% 0, 100% 50%, 100% 100%, 0 100%);
   content: "";
+  display: block;
   height: 100%;
-  left: -100%;
+  left: 0;
   position: absolute;
   top: 0;
+  transition: -webkit-clip-path 0.2s ease;
+  transition: clip-path 0.2s ease;
+  transition: clip-path 0.2s ease, -webkit-clip-path 0.2s ease;
   width: 100%;
-  will-change: transform;
+  z-index: -1;
 }
+.btn:after {
+  --thickness: 5px;
+  background: var(--background);
+  height: calc(100% - var(--thickness) * 2);
+  left: var(--thickness);
+  top: var(--thickness);
+  width: calc(100% - var(--thickness) * 2);
+}
+.btn:hover:after,
 .btn:hover:before {
-  -webkit-animation: move-in 0.3s forwards;
-  animation: move-in 0.3s forwards;
-}
-@-webkit-keyframes move-in {
-  0% {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(100%);
-  }
-}
-@keyframes move-in {
-  0% {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(100%);
-  }
-}
-@-webkit-keyframes move-out {
-  0% {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(200%);
-  }
-}
-@keyframes move-out {
-  0% {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(200%);
-  }
+  -webkit-clip-path: polygon(
+    0 50%,
+    var(--tilt) 0,
+    calc(100% - var(--tilt)) 0,
+    100% 50%,
+    calc(100% - var(--tilt)) 100%,
+    var(--tilt) 100%
+  );
+  clip-path: polygon(
+    0 50%,
+    var(--tilt) 0,
+    calc(100% - var(--tilt)) 0,
+    100% 50%,
+    calc(100% - var(--tilt)) 100%,
+    var(--tilt) 100%
+  );
 }
